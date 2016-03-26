@@ -4,9 +4,8 @@
   "description": "NASA patent searching app.",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "serve": "nodemon server.js",
     "build": "babel src -w -d ./",
-    "serve": "node server.js",
     "test": "mocha --compilers js:babel-register"
   },
   "author": "Joshua N. Cox <joshua.n.cox@gmail.com> (http://jonoco.me/)",
