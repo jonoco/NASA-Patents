@@ -6,7 +6,8 @@
   "scripts": {
     "serve": "nodemon server.js",
     "build": "babel src -w -d ./",
-    "test": "mocha --compilers js:babel-register"
+    "test": "mocha --compilers js:babel-register",
+    "deploy": "./bin/deploy"
   },
   "author": "Joshua N. Cox <joshua.n.cox@gmail.com> (http://jonoco.me/)",
   "license": "MIT",
