@@ -1,0 +1,62 @@
+doctype html
+html(lang='en')
+	head
+		title NASA Patents
+		meta(charset='UTF-8')
+		link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous")
+		link(rel='stylesheet' href='/styles.css')
+		link(rel='icon' src='/favicon.ico')
+	body
+		.container-fluid
+			h1 
+				a(href='/') NASA Patents
+
+			form(action='/search')
+				.form-group
+					input.form-control(
+						type='text'
+						name='keyword'
+						placeholder='search by patent keyword'
+					)
+
+			if !data & !error
+				.jumbotron
+					h2 Try searching for a patent...
+					p.info The NASA patent portfolio is available to benefit US citizens. Through partnerships and licensing agreements with industry, these patents ensure that NASA’s investments in pioneering research find secondary uses that benefit the economy, create jobs, and improve quality of life. - #[a(href='https://api.nasa.gov/index.html') NASA Open APIs]
+			
+			if error
+				div=error
+
+		if data
+			.container-fluid 
+				h2 Number of results: #{data.count}
+			for result in data.results
+				.container-fluid
+					h3=result.title
+					p=result.abstract
+
+					dl.dl-horizontal
+						dt Category
+						dd #{result.category}
+						dt Innovators
+						for indiv in result.innovator
+							dd #{indiv.fname} #{indiv.mname} #{indiv.lname} - #[small #{indiv.company}]
+						dt Reference Number
+						dd #{result.reference_number}
+						dt Serial Number
+						dd #{result.serial_number}
+					address.text-right
+						strong #{result.contact.facility}#[br]
+						if result.contact.office
+							span #{result.contact.office}#[br]
+						if result.contact.address
+							span #{result.contact.address}#[br]
+						if result.contact.email
+							- var email = 'mailto:' + result.contact.email
+							a&attributes({'href': email }) #{result.contact.email}#[br]
+						if result.contact.phone
+							span #{result.contact.phone}#[br]
+		.container-fluid
+			div(class='navbar-fixed-bottom footer')
+				span created by #[a(href='http://jonoco.me') jonoco]
+				span powered by the #[a(href='https://api.nasa.gov/index.html') NASA API]
