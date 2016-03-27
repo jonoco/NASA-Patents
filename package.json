@@ -4,7 +4,8 @@
   "description": "NASA patent searching app.",
   "main": "server.js",
   "scripts": {
-    "serve": "nodemon server.js",
+    "start": "node server.js",
+    "dev": "./bin/dev",
     "build": "babel src -w -d ./",
     "test": "mocha --compilers js:babel-register",
     "deploy": "./bin/deploy"

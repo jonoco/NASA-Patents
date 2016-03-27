@@ -4,10 +4,10 @@ import jade from 'jade';
 import bodyParser from 'body-parser';
 import { logger } from './middleware';
 import axios from 'axios';
-import { API_KEY } from './keys';
 
 const app = express();
 const PORT = process.env.PORT || 9000;
+const API_KEY = process.env.API_KEY || 'DEMO_KEY';
 const ROOT_URL = 'https://api.nasa.gov/patents/content';
 
 app.use(bodyParser.json());

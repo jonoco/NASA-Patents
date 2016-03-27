@@ -22,12 +22,11 @@ var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _keys = require('./keys');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var app = (0, _express2.default)();
 var PORT = process.env.PORT || 9000;
+var API_KEY = process.env.API_KEY || 'DEMO_KEY';
 var ROOT_URL = 'https://api.nasa.gov/patents/content';
 
 app.use(_bodyParser2.default.json());
@@ -46,7 +45,7 @@ app.get('/search', _middleware.logger, function (req, res) {
   if (query) {
     var limit = 500;
     var tags = false;
-    var url = ROOT_URL + '?query=' + query + '&limit=' + limit + '&tags=' + tags + '&api_key=' + _keys.API_KEY;
+    var url = ROOT_URL + '?query=' + query + '&limit=' + limit + '&tags=' + tags + '&api_key=' + API_KEY;
 
     _axios2.default.get(url).then(function (response) {
       res.render('index', { data: response.data });
