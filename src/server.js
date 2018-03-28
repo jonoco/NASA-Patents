@@ -38,7 +38,8 @@ app.get('/search', logger, (req, res) => {
           console.log('Error: ', response.message);
           res.render('index', { error: response.message });
         } else {
-          console.log('Errored Response status: ' + response.status);
+          console.log('Error Response status: ' + response.status);
+          console.log(response.data);
           res.render('index', { error: response.status });
         }
     });
